@@ -3,6 +3,7 @@ package com.a2e.chatbot.User.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,10 +16,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@EnableAutoConfiguration
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "SEQ_GEN")
+    private long id;
     private String firstName;
     private String lastName;
     private String password;
@@ -28,7 +31,7 @@ public class User {
     private String slack;
     private Boolean active;
     private Boolean prospect;
-    private String unique_code;
+    private Integer unique_code;
     private Date uniqueCodeExpiration;
     private String attributes;
     private Date updatedOn;
