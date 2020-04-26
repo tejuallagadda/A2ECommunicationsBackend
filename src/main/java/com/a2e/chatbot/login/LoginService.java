@@ -24,6 +24,7 @@ public class LoginService {
     public Response verifyLogin(String email, String password){
         Response response = new Response();
         List<User> users = userService.findByEmail(email);
+        // TODO Return some key which is used as secured key for further requests.
         if(users.get(0).getPassword().equals(password)){
             User user = users.get(0);
             Date date = new Date();
