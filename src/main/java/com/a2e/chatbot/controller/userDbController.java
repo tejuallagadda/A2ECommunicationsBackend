@@ -13,17 +13,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.ResultSet;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by tejaswini.a on 20/04/20.
  */
 @Controller
-public class userDbController {
+public class UserDbController {
 
     @Autowired
     private IUserService userService;
@@ -55,6 +53,16 @@ public class userDbController {
         } catch (Exception e){
             throw new IllegalArgumentException("User with ID is not available");
         }
+    }
+
+    @GetMapping("/getUser/{email}")
+    public @ResponseBody List<User> getUserByEmail(@PathVariable("email") String email){
+        try{
+            return userService.findByEmail(email);
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return new ArrayList<>();
     }
 
     @DeleteMapping("user/{userId}")
