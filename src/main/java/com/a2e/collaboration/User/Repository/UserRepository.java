@@ -1,8 +1,7 @@
-package com.a2e.chatbot.User.Repository;
+package com.a2e.collaboration.user.repository;
 
-import com.a2e.chatbot.User.model.User;
+import com.a2e.collaboration.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

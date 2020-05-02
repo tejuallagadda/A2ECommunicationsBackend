@@ -1,10 +1,10 @@
-package com.a2e.chatbot.User.model;
+package com.a2e.collaboration.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +17,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EnableAutoConfiguration
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +31,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
@@ -49,17 +49,19 @@ public class User {
     private String slack;
 
     @Column(name = "active")
-    private Boolean active;
+    private Boolean isAactive;
 
     @Column(name = "prospect")
-    private Boolean prospect;
+    private Boolean isProspect;
 
+    @JsonIgnore
     @Column(name = "unique_code")
     private Integer uniqueCode;
 
     @Column(name = "unique_code_Expiration")
     private Date uniqueCodeExpiration;
 
+    @JsonIgnore
     @Column(name = "attributes")
     private String attributes;
 
