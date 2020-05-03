@@ -7,10 +7,7 @@ import com.a2e.collaboration.signp.model.SignupRequest;
 import com.a2e.collaboration.user.model.User;
 import com.a2e.collaboration.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by tejaswini.a on 02/05/20.
@@ -22,6 +19,7 @@ public class SignUpController {
     @Autowired
     private UserRepository userRepository;
 
+    @CrossOrigin(methods = RequestMethod.POST)
     @PostMapping(value = "/signup")
     public @ResponseBody LoginResponse signup(@RequestBody SignupRequest signupRequest){
         User user = userRepository.findByEmail("jbdj").get(0);
