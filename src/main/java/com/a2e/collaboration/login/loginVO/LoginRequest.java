@@ -1,7 +1,7 @@
 package com.a2e.collaboration.login.loginVO;
 
 import com.a2e.collaboration.general.request.A2eRequest;
-import com.a2e.collaboration.user.Request.UserRequestObject;
+import com.a2e.collaboration.user.Request.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginRequest {
     private A2eRequest callerInfo;
-    private UserRequestObject login;
+    private User login;
 }

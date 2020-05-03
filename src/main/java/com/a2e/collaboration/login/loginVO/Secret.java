@@ -15,10 +15,10 @@ public class Secret {
     private String otp;
     private String password;
 
-//    @Override
-//    public String toString(){
-//        return "******";
-//    }
+    @Override
+    public String toString(){
+        return "******";
+    }
 
     public Boolean equals(Secret secret){
         if((secret.otp!=null && secret.otp == this.otp)||

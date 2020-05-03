@@ -1,6 +1,6 @@
 package com.a2e.collaboration.user.repository;
 
-import com.a2e.collaboration.user.model.User;
+import com.a2e.collaboration.user.model.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,12 +11,12 @@ import java.util.List;
  */
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long>{
+public interface UserRepository extends JpaRepository<UserDTO,Long>{
 
 
-    List<User> findByFirstName(String FirstName);
+    List<UserDTO> findByFirstName(String FirstName);
 
-    List<User> findByEmail(String email);
+    List<UserDTO> findByEmail(String email);
 
 
 }
