@@ -1,4 +1,4 @@
-package com.a2e.collaboration.user.model;
+package com.a2e.collaboration.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

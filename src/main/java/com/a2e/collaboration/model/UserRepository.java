@@ -1,6 +1,5 @@
-package com.a2e.collaboration.user.repository;
+package com.a2e.collaboration.model;
 
-import com.a2e.collaboration.user.model.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

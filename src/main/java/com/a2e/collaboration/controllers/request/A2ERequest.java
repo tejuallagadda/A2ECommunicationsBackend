@@ -1,5 +1,6 @@
-package com.a2e.collaboration.general.request;
+package com.a2e.collaboration.controllers.request;
 
+import com.a2e.collaboration.controllers.request.commons.CallerInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +12,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class A2eRequest {
-
-    private String appName;
-    private String appKey;
+public class A2ERequest {
+    private CallerInfo callerInfo;
 }

@@ -1,6 +1,6 @@
-package com.a2e.collaboration.user.Request;
+package com.a2e.collaboration.controllers.commons;
 
-import com.a2e.collaboration.login.loginVO.Secret;
+import com.a2e.collaboration.commons.Secret;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

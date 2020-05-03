@@ -1,6 +1,6 @@
-package com.a2e.collaboration.login.loginVO;
+package com.a2e.collaboration.controllers.response;
 
-import com.a2e.collaboration.user.model.UserDTO;
+import com.a2e.collaboration.controllers.response.commons.A2EHeader;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RespDetails {
-    private UserDTO user;
+public class A2EResponse {
+    private A2EHeader a2EHeader;
+
 }

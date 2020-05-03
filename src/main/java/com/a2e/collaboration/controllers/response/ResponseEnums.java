@@ -1,6 +1,4 @@
-package com.a2e.collaboration.general.enums;
-
-import com.a2e.collaboration.general.response.A2eResponse;
+package com.a2e.collaboration.controllers.response;
 
 /**
  * Created by tejaswini.a on 03/05/20.

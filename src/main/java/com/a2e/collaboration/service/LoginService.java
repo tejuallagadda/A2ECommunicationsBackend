@@ -1,8 +1,8 @@
-package com.a2e.collaboration.login.service;
+package com.a2e.collaboration.service;
 
-import com.a2e.collaboration.user.Request.User;
-import com.a2e.collaboration.user.model.UserDTO;
-import com.a2e.collaboration.user.repository.UserRepository;
+import com.a2e.collaboration.controllers.commons.User;
+import com.a2e.collaboration.model.UserDTO;
+import com.a2e.collaboration.model.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
