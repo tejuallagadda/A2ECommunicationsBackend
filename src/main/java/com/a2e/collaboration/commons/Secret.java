@@ -35,7 +35,7 @@ public class Secret {
     * @return returns true if actual and entered otp are same
     */
     public Boolean validateOtp(String actualOtp){
-        return Utilites.isNotNull(this.otp) && this.otp.equals(actualOtp);
+        return Utilities.isNotNull(this.otp) && this.otp.equals(actualOtp);
     }
 
     /*
@@ -43,6 +43,6 @@ public class Secret {
      * @return returns true if actual and entered password are same
      */
     public Boolean validatePassword(String actualpassword){
-        return Utilites.isNotNull(this.password) && this.otp.equals(actualpassword);
+        return Utilities.isNotNull(this.password) && this.otp.equals(actualpassword);
     }
 }

@@ -28,8 +28,7 @@ public class SignUpController {
     public @ResponseBody
     UserResponse signup(@RequestBody UserRequest userRequest){
         logger.info("Inside SignUpController signup() signUpRequest :"+userRequest);
-        UserResponse userResponse = signupService.createProspectUser(userRequest);
-        return new UserResponse(200,signupServiceResponse.getRespCode(),"Email with OTP sent successfully",signupServiceResponse.getUser());
+        return signupService.createProspectUser(userRequest);
     }
 
 /*    @PostMapping(value = "/signup/otp")

@@ -1,17 +1,16 @@
 package com.a2e.collaboration.controllers.request;
 
 import com.a2e.collaboration.controllers.commons.User;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Created by tejaswini.a on 02/05/20.
  */
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest extends A2ERequest {
-    private User login;
+    private User user;
 }

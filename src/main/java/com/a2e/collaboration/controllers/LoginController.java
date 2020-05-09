@@ -4,8 +4,6 @@ import com.a2e.collaboration.service.AuthService;
 import com.a2e.collaboration.controllers.request.UserRequest;
 import com.a2e.collaboration.controllers.response.UserResponse;
 import com.a2e.collaboration.service.LoginService;
-import com.a2e.collaboration.controllers.commons.User;
-import com.a2e.collaboration.model.UserDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -30,21 +28,8 @@ public class LoginController {
 
     //TODO write enum file for error codes;
     @PostMapping(value = "/login", consumes = "application/json")
-    public UserResponse login(@RequestBody UserRequest userRequest){
-        if(!authService.isAppAuthorized(userRequest.getCallerInfo())){
-            return new UserResponse(401,114,"Unauthorized request");
-        }
-        logger.info("Inside login controller loginRequest"+ userRequest);
-        User user = userRequest.getLogin();
-        if(user.getEmail() == null || user.getSecret()==null || user.getSecret().getPassword()==null)
-        {
-            return new UserResponse(400,111,"Incorrect email or Password");
-        }
-        UserDTO userResp =  loginService.login(user);
-        logger.info("Inside login controller userResp"+userResp);
-        if(userResp!=null) {
-            return new UserResponse(200, 104, "User logged in successfully", userResp);
-        }
-        return new UserResponse(400,111,"Incorrect email or Password");
+    public UserResponse login(@RequestBody UserRequest userRequest) {
+        logger.info("Inside Login Controller :" + userRequest);
+        return loginService.login(userRequest);
     }
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class A2EHeader {
-    private long respCode;
-    private long subRespCode;
-    private String respMsg;
+    private long code;
+    private long subCode;
+    private String message;
 }

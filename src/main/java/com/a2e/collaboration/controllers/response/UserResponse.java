@@ -1,15 +1,13 @@
 package com.a2e.collaboration.controllers.response;
 
 import com.a2e.collaboration.controllers.commons.User;
-import com.a2e.collaboration.model.UserDTO;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * Created by tejaswini.a on 02/05/20.
  */
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 //TODO extend A2EResponse
