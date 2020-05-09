@@ -1,6 +1,6 @@
 package com.a2e.collaboration.controllers.response;
 
-import com.a2e.collaboration.controllers.commons.User;
+import com.a2e.collaboration.controllers.commons.UserDTO;
 import lombok.*;
 
 /**
@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 //TODO extend A2EResponse
 public class UserResponse extends A2EResponse{
-    private User user;
+    private UserDTO user;
 
 /*    public UserResponse(long respCode, long subRespCode, String respMsg){
         this.finalResp = new A2EResponse(respCode, subRespCode, respMsg);

@@ -23,9 +23,6 @@ public class LoginController {
     @Resource(name = "loginService")
     private LoginService loginService;
 
-    @Resource(name = "authService")
-    private AuthService authService;
-
     //TODO write enum file for error codes;
     @PostMapping(value = "/login", consumes = "application/json")
     public UserResponse login(@RequestBody UserRequest userRequest) {

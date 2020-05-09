@@ -1,27 +1,16 @@
 package com.a2e.collaboration.service.mapping;
 
-import com.a2e.collaboration.controllers.commons.User;
-import com.a2e.collaboration.model.UserDTO;
+import com.a2e.collaboration.controllers.commons.UserDTO;
+import com.a2e.collaboration.model.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Random;
-
+@Service
 public class Mapping {
 
-    public void mapUser(User user, UserDTO userDTO){
-        userDTO.setEmail(user.getEmail());
-        userDTO.setFirstName(user.getFirstName());
-        userDTO.setLastName(user.getLastName());
-        Calendar date = Calendar.getInstance();
-        userDTO.setCreatedOn(date.getTime());
-        //TODO Can we hardcode true value here ?
-        //userDTO.setIsActive(true);
-        userDTO.setIsProspect(true);
-        userDTO.setUpdatedOn(date.getTime());
-        Random random = new Random();
-        String otp = String.format("%06d", random.nextInt(1000000));
-        userDTO.setUniqueCode(otp);
-        date.add(Calendar.MINUTE, 15);
-        userDTO.setUniqueCodeExpiration(date.getTime());
+    public void mapUser(UserDTO userDTO, User user){
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
     }
 }

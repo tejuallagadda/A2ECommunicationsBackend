@@ -25,26 +25,20 @@ public class SignUpController {
 
     //TODO add routing token as request parameter
     @PostMapping(value = "/signup")
-    public @ResponseBody
-    UserResponse signup(@RequestBody UserRequest userRequest){
+    public @ResponseBody UserResponse signup(@RequestBody UserRequest userRequest){
         logger.info("Inside SignUpController signup() signUpRequest :"+userRequest);
         return signupService.createProspectUser(userRequest);
     }
 
-/*    @PostMapping(value = "/signup/otp")
-    public  @ResponseBody
-    UserResponse otpValidation(@RequestBody UserRequest userRequest){
+    @PostMapping(value = "/signup/otp")
+    public  @ResponseBody UserResponse otpValidation(@RequestBody UserRequest userRequest){
         logger.info("Inside SignUpController otpValidation() signUpRequest :"+userRequest);
-        SignupServiceResponse signupServiceResponse = signupService.verifyOtp(userRequest);
-        return new UserResponse(200, signupServiceResponse.getRespCode(), "OTP verified and user created successfully", signupServiceResponse.getUser());
+        return signupService.verifyOtp(userRequest);
     }
 
     @PostMapping(value = "/sigup/password")
-    public  @ResponseBody
-    UserResponse savePassword(@RequestBody UserRequest userRequest){
+    public  @ResponseBody UserResponse savePassword(@RequestBody UserRequest userRequest){
         logger.info("Inside SignUpController savePassword() signUpRequest :"+userRequest);
-        SignupServiceResponse signupServiceResponse = signupService.savePassword(userRequest);
-        return new UserResponse(200, signupServiceResponse.getRespCode(), "Password saved successfully", signupServiceResponse.getUser());
+        return signupService.savePassword(userRequest);
     }
-*/
 }

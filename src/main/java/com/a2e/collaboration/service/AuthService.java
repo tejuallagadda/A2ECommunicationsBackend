@@ -1,11 +1,9 @@
 package com.a2e.collaboration.service;
 
 import com.a2e.collaboration.commons.A2EErrorCode;
-import com.a2e.collaboration.commons.Secret;
 import com.a2e.collaboration.controllers.request.A2ERequest;
 import com.a2e.collaboration.controllers.request.commons.CallerInfo;
-import com.a2e.collaboration.controllers.response.UserResponse;
-import com.a2e.collaboration.model.UserDTO;
+import com.a2e.collaboration.model.User;
 import com.a2e.collaboration.model.UserRepository;
 import com.a2e.collaboration.service.validation.A2EException;
 import org.apache.logging.log4j.LogManager;
@@ -40,10 +38,10 @@ public class AuthService {
 
     public void authenticateOTP(String email, String otp) throws A2EException {
         //TODO
-        List<UserDTO> users = userRepository.findByEmail(email);
+        List<User> users = userRepository.findByEmail(email);
         if(users.size() != 1)
             throw new A2EException(A2EErrorCode.USER_NOT_FOUND);
-        UserDTO user = users.get(0);
+        User user = users.get(0);
         if(user.getUniqueCode().equals(otp)){
             Calendar date =Calendar.getInstance();
             if(user.getUniqueCodeExpiration().before(date.getTime())){
@@ -56,10 +54,10 @@ public class AuthService {
     }
     public void authenticatePassword(String email, String password) throws A2EException {
         //TODO
-        List<UserDTO> users = userRepository.findByEmail(email);
+        List<User> users = userRepository.findByEmail(email);
         if(users.size() != 1)
             throw new A2EException(A2EErrorCode.USER_NOT_FOUND);
-        UserDTO user = users.get(0);
+        User user = users.get(0);
         if(user.getPassword().equals(password)){
             user.setLastLogin(new Date());
             userRepository.save(user);

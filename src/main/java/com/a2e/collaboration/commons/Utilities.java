@@ -2,6 +2,8 @@ package com.a2e.collaboration.commons;
 
 import org.springframework.context.annotation.Bean;
 
+import java.util.regex.Pattern;
+
 
 public class Utilities {
 
@@ -13,15 +15,17 @@ public class Utilities {
         return null != o;
     }
     public static boolean isValidEmail(String email){
-        //TODO keep valid email logic here.
-        return true;
+        if(isNull(email) || email.isEmpty()) { return false; }
+
+        String emailRegex =  "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
     }
-    public static boolean isValidFirstName(String Name){
-        //TODO implement
-        return true;
-    }
-    public static boolean isValidLastName(String name){
-        //TODO implement
-        return true;
+    public static boolean isValidString(String name){
+        return isNotNull(name) && !name.isEmpty() && name.matches("^[a-zA-Z]*$");
     }
 }

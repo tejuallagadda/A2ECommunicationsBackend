@@ -1,7 +1,10 @@
 package com.a2e.collaboration.service.validation;
 
+import org.springframework.stereotype.Service;
+
 import static com.a2e.collaboration.commons.A2EErrorCode.*;
 
+@Service
 public class SecretValidation {
 
     public SecretValidation isValidOTP(String otp) throws ValidationException {

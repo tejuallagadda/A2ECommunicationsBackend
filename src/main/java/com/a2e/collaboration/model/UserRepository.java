@@ -10,12 +10,12 @@ import java.util.List;
  */
 
 @Repository
-public interface UserRepository extends JpaRepository<UserDTO,Long>{
+public interface UserRepository extends JpaRepository<User,Long>{
 
 
-    List<UserDTO> findByFirstName(String FirstName);
+    List<User> findByFirstName(String FirstName);
 
-    List<UserDTO> findByEmail(String email);
+    List<User> findByEmail(String email);
 
 
 }

@@ -16,6 +16,8 @@ public enum A2EErrorCode {
     INVALID_PASSWORD(401, 1009, "password is invalid", ""),
     OTP_EXPIRED(401, 1010, "OTP Expired", ""),
     USER_NOT_FOUND(404, 1011, "User not found", ""),
+    EMAIL_ALREADY_EXISTS(400, 1012, "Email already exists", ""),
+    EMAIL_NOT_SENT(502, 1013, "Email not sent", "Email could not be sent due to some internal error"),
     APP_NOT_AUTHORIZED(401,8000, "Unauthorized App", "Calling Application is not authorized with the given key");
 
     private int httpCode;

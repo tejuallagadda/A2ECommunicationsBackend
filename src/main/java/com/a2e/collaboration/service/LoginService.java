@@ -1,7 +1,6 @@
 package com.a2e.collaboration.service;
 
 
-import com.a2e.collaboration.controllers.commons.User;
 import com.a2e.collaboration.controllers.request.UserRequest;
 import com.a2e.collaboration.controllers.response.UserResponse;
 import com.a2e.collaboration.model.UserRepository;
@@ -14,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-
-import static com.a2e.collaboration.commons.A2EErrorCode.APP_NOT_AUTHORIZED;
 
 /**
  * Created by tejaswini.a on 02/05/20.
@@ -28,11 +24,7 @@ public class LoginService {
     @Resource(name = "authService")
     private AuthService authService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private Validation validation;
-    @Autowired
-    private Mapping mapping;
 
     public UserResponse login(UserRequest userRequest){
         logger.info("Inside login controller loginRequest"+ userRequest);
@@ -47,6 +39,7 @@ public class LoginService {
             return userResponse;
         }
         userResponse.setSuccess();
+        userResponse.setUser(userRequest.getUser());
         return userResponse;
     }
 }

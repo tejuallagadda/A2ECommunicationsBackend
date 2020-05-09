@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class A2EResponse {
     private static final int SUCCESS_CODE = 200;
     private static final int SUCCESS_A2E_CODE = 0;
-    private A2EHeader a2EHeader;
+    private A2EHeader a2EHeader = new A2EHeader();
     public void setError(A2EErrorCode a2EErrorCode){
         a2EHeader.setCode(a2EErrorCode.getHttpCode());
         a2EHeader.setSubCode(a2EErrorCode.getA2eCode());
