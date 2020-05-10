@@ -1,5 +1,6 @@
 package com.a2e.collaboration.service.mapping;
 
+import com.a2e.collaboration.commons.Utilities;
 import com.a2e.collaboration.controllers.commons.UserDTO;
 import com.a2e.collaboration.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,9 +22,7 @@ public class Mapping {
         user.setIsProspect(true);
         user.setUpdatedOn(date.getTime());
         user.setLastLogin(date.getTime());
-        Random random = new Random();
-        String otp = String.format("%06d", random.nextInt(1000000));
-        user.setUniqueCode("123456");
+        user.setUniqueCode(Utilities.getOTP());
         date.add(Calendar.MINUTE, 15);
         user.setUniqueCodeExpiration(date.getTime());
     }

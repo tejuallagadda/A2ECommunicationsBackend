@@ -2,6 +2,7 @@ package com.a2e.collaboration.commons;
 
 import org.springframework.context.annotation.Bean;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 
 
@@ -27,5 +28,10 @@ public class Utilities {
     }
     public static boolean isValidString(String name){
         return isNotNull(name) && !name.isEmpty() && name.matches("^[a-zA-Z]*$");
+    }
+
+    public static String getOTP(){
+        Random random = new Random();
+        return String.format("%06d", random.nextInt(1000000));
     }
 }
