@@ -1,6 +1,7 @@
 package com.a2e.collaboration.service;
 
 import com.a2e.collaboration.commons.A2EErrorCode;
+import com.a2e.collaboration.commons.Utilities;
 import com.a2e.collaboration.controllers.commons.UserDTO;
 import com.a2e.collaboration.controllers.request.UserRequest;
 import com.a2e.collaboration.controllers.response.UserResponse;
@@ -10,6 +11,7 @@ import com.a2e.collaboration.model.UserRepository;
 import com.a2e.collaboration.service.validation.A2EException;
 import com.a2e.collaboration.service.validation.Validation;
 import com.a2e.collaboration.service.validation.ValidationException;
+import lombok.Data;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
@@ -54,9 +56,23 @@ public class SignupService {
         try {
             authService.authorizeApp(userRequest);
             validation.validateSignUpPage(userRequest);
+            UserDTO userDTO = userRequest.getUser();
             User user = new User();
-            mapping.mapNewUser(userRequest.getUser(),user);
-            userRepository.save(user);
+            List<User> users = userRepository.findByEmail(userDTO.getEmail());
+            if(users.size()!=0) {
+                Calendar currentDate = Calendar.getInstance();
+                if (users.get(0).getUniqueCodeExpiration().before(currentDate.getTime())) {
+                    user = users.get(0);
+                } else {
+                    user.setUniqueCode(Utilities.getOTP());
+                    currentDate.add(Calendar.MINUTE, 15);
+                    user.setUniqueCodeExpiration(currentDate.getTime());
+                    userRepository.save(user);
+                }
+            }else {
+                mapping.mapNewUser(userRequest.getUser(), user);
+                userRepository.save(user);
+            }
             mailService.sendMailWithOTP(user.getEmail(), user.getUniqueCode());
         } catch(A2EException a2eException){
             userResponse.setError(a2eException.getA2EErrorCode());
