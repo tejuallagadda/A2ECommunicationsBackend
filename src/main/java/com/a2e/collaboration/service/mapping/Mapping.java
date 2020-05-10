@@ -23,7 +23,7 @@ public class Mapping {
         user.setLastLogin(date.getTime());
         Random random = new Random();
         String otp = String.format("%06d", random.nextInt(1000000));
-        user.setUniqueCode(otp);
+        user.setUniqueCode("123456");
         date.add(Calendar.MINUTE, 15);
         user.setUniqueCodeExpiration(date.getTime());
     }
