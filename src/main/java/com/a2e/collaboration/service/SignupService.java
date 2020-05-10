@@ -8,12 +8,10 @@ import com.a2e.collaboration.model.User;
 import com.a2e.collaboration.service.mapping.Mapping;
 import com.a2e.collaboration.model.UserRepository;
 import com.a2e.collaboration.service.validation.A2EException;
-import com.a2e.collaboration.service.validation.UserValidation;
 import com.a2e.collaboration.service.validation.Validation;
 import com.a2e.collaboration.service.validation.ValidationException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,28 +41,31 @@ public class SignupService {
     private Validation validation;
     @Autowired
     private Mapping mapping;
+    @Autowired
+    private MailService mailService;
 
     //TODO use autowire instead of new to create an object
     //TODO create validation error method seperately
     //TODO add new layer for validation
     public UserResponse createProspectUser(UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
+        userResponse.setUser(userRequest.getUser());
         logger.info("Inside SignupService saveProspectUser() : "+userRequest.toString());
         try {
             authService.authorizeApp(userRequest);
             validation.validateSignUpPage(userRequest);
+            User user = new User();
+            mapping.mapNewUser(userRequest.getUser(),user);
+            userRepository.save(user);
+            mailService.sendMailWithOTP(user.getEmail(), user.getUniqueCode());
         } catch(A2EException a2eException){
             userResponse.setError(a2eException.getA2EErrorCode());
             //TODO Map userrequest to userresponse
             return userResponse;
         }
-
-        User userDto = getNewUser(userRequest.getUser());
-        userRepository.save(userDto);
-        userResponse.setSuccess();
-        sendMailWithOTP(userDto.getEmail(), userDto.getUniqueCode());
         //TODO Can we set User in the request to User in the response ? or do we need to create new
         // UserResponse and map from UserRequest ?
+        userResponse.setSuccess();
         userResponse.setUser(userRequest.getUser());
         return userResponse;
     }
@@ -113,39 +114,5 @@ public class SignupService {
         userResponse.setUser(userRequest.getUser());
         userResponse.setSuccess();
         return userResponse;
-    }
-
-    private User getNewUser(UserDTO userDTO){
-        User user = new User();
-        mapping.mapUser(userDTO, user);
-        Calendar date = Calendar.getInstance();
-        user.setCreatedOn(date.getTime());
-        user.setIsAactive(true);
-        user.setIsProspect(true);
-        user.setUpdatedOn(date.getTime());
-        user.setLastLogin(date.getTime());
-        Random random = new Random();
-        String otp = String.format("%06d", random.nextInt(1000000));
-        user.setUniqueCode(otp);
-        date.add(Calendar.MINUTE, 15);
-        user.setUniqueCodeExpiration(date.getTime());
-        return user;
-    }
-
-    private void sendMailWithOTP (String emailId, String otp){
-        try {
-            Email email = new SimpleEmail();
-            email.setHostName("smtp.gmail.com");
-            email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("a2ecollaboration2020@gmail.com(opens in new tab)", "nkvwwpdolqtezeaw"));
-            email.setSSLOnConnect(true);
-            email.setFrom("teju.allagadda@gmail.com(opens in new tab)");
-            email.setSubject("OTP to register in A2E");
-            email.setMsg("OTP requested by you is " + otp + "\n This message is computer generated. Please do not reply");
-            email.addTo(emailId+"(opens in new tab)");
-            email.send();
-        } catch(Exception e){
-            logger.error("Could not send OTP to the mail address", e);
-        }
     }
 }
