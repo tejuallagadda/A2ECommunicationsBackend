@@ -1,30 +1,44 @@
 package com.a2e.collaboration.controllers;
 
-import com.a2e.collaboration.general.response.A2eResponse;
-import com.a2e.collaboration.login.loginVO.LoginResponse;
-import com.a2e.collaboration.login.loginVO.RespDetails;
-import com.a2e.collaboration.signp.model.SignupRequest;
-import com.a2e.collaboration.user.model.User;
-import com.a2e.collaboration.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.a2e.collaboration.controllers.request.UserRequest;
+import com.a2e.collaboration.controllers.response.UserResponse;
+import com.a2e.collaboration.service.SignupService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * Created by tejaswini.a on 02/05/20.
  */
-
+@CrossOrigin(methods = RequestMethod.POST)
 @RestController
 public class SignUpController {
 
-    @Autowired
-    private UserRepository userRepository;
+    Logger logger = LogManager.getLogger(SignUpController.class);
 
-    @CrossOrigin(methods = RequestMethod.POST)
+    //TODO Difference between Resource and Autowired ?
+    @Resource(name = "signupService")
+    private SignupService signupService;
+
+
+    //TODO add routing token as request parameter
     @PostMapping(value = "/signup")
-    public @ResponseBody LoginResponse signup(@RequestBody SignupRequest signupRequest){
-        User user = userRepository.findByEmail("jbdj").get(0);
-        return new LoginResponse(new A2eResponse(200,101,"Email with OTP sent successfully"),
-                new RespDetails(user));
+    public @ResponseBody UserResponse signup(@RequestBody UserRequest userRequest){
+        logger.info("Inside SignUpController signup() signUpRequest :"+userRequest);
+        return signupService.createProspectUser(userRequest);
     }
 
+    @PostMapping(value = "/signup/otp")
+    public  @ResponseBody UserResponse otpValidation(@RequestBody UserRequest userRequest){
+        logger.info("Inside SignUpController otpValidation() signUpRequest :"+userRequest);
+        return signupService.verifyOtp(userRequest);
+    }
+
+    @PostMapping(value = "/sigup/password")
+    public  @ResponseBody UserResponse savePassword(@RequestBody UserRequest userRequest){
+        logger.info("Inside SignUpController savePassword() signUpRequest :"+userRequest);
+        return signupService.savePassword(userRequest);
+    }
 }

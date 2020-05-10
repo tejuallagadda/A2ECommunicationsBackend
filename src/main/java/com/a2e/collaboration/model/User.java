@@ -1,4 +1,4 @@
-package com.a2e.collaboration.user.model;
+package com.a2e.collaboration.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Date;
  * Created by tejaswini.a on 20/04/20.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users_info")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -56,7 +56,7 @@ public class User {
 
     @JsonIgnore
     @Column(name = "unique_code")
-    private Integer uniqueCode;
+    private String uniqueCode;
 
     @Column(name = "unique_code_Expiration")
     private Date uniqueCodeExpiration;
