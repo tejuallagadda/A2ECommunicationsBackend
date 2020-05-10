@@ -21,8 +21,6 @@ public class UserValidation {
     private UserRepository userRepository;
 
     public UserValidation isValidEmail(String email) throws ValidationException {
-
-        //TODO keep valid email logic here.
         if(Utilities.isValidEmail(email)) {
             return this;
         }

@@ -22,8 +22,7 @@ public class Validation {
             throw new ValidationException(INVALID_USER);
         userValidation.isValidEmail(user.getEmail())
                 .isValidFirstName(user.getFirstName())
-                .isValidLastName(user.getLastName())
-                .isNotExistingEmail(user.getEmail());
+                .isValidLastName(user.getLastName());
     }
     public void validateOTPPage(UserRequest userRequest) throws ValidationException {
         UserDTO user = userRequest.getUser();
